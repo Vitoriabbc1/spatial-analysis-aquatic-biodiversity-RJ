@@ -68,6 +68,8 @@ Processamento realizado no **ArcGIS Pro** com as seguintes técnicas:
 
 ```
 📁 dados/
+   - [Insetos Aquáticos] (dados/insetos_limpo.csv)
+   - [Peixes Dulcícolas](dados/peixes.csv)
    ├── ocorrencias_biodiversidade.csv   # Registros de ocorrência (8.970 pontos)
    └── iqa_mananciais_2016_2024.csv     # Índice de Qualidade Hídrica
 📁 mapas/
