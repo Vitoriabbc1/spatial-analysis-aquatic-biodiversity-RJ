@@ -98,7 +98,8 @@ Processamento realizado no **ArcGIS Pro** com as seguintes técnicas:
 
 ## 🗺️ Mapas
 **Regiões Hidrograficas do Estado do Rio de Janeiro** 
-![RH] 
+![RH](https://github.com/Vitoriabbc1/spatial-analysis-aquatic-biodiversity-RJ/blob/1b7c4f63f07f17fd4092d2818cb6a8e77faf7558/RHS_RJ.png) 
+
 **Distribuição de macroinvertebrados aquáticos por RH**  
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
