@@ -102,7 +102,7 @@ Processamento realizado no **ArcGIS Pro** com as seguintes técnicas:
 
 **Distribuição de macroinvertebrados aquáticos por RH**  
 *Distribuição de Insetos Aquaticos na RH de Paraiba do Sul e Itapaboana*
-![MACROINVERTEBRADOS] (https://github.com/Vitoriabbc1/spatial-analysis-aquatic-biodiversity-RJ/blob/5d128ccc32667dca7c49445c1c06a4609e5cf080/DISTRIBUI%C3%87%C3%83O%20INSETOS%20AQUARICOS%20ITAPABOANA.png)
+![MACROINVERTEBRADOS](https://github.com/Vitoriabbc1/spatial-analysis-aquatic-biodiversity-RJ/blob/5d128ccc32667dca7c49445c1c06a4609e5cf080/DISTRIBUI%C3%87%C3%83O%20INSETOS%20AQUARICOS%20ITAPABOANA.png)
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
 **Densidade de ocorrências da biodiversidade aquática**  
