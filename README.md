@@ -129,7 +129,7 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 **Distribuição de Insetos Aquáticos por RH**  
 *Distribuição de Insetos Aquaticos em Itapaboana* 
 
-![Insetos](dados/mapa/DISTRIBUIÇÃO INSETOS AQUARICOS ITAPABOANA.png) 
+![Insetos](dados/mapa/itapaboana.png)
 
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
