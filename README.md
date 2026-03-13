@@ -124,12 +124,12 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 ## 🗺️ Mapas
 
 **Regiões Hidrograficas do Estado do Rio de Janeiro**
-![RHS](dados/RHS_RJ.png)
+![RHS](dados/mapa/RHS_RJ.png)
 
 **Distribuição de Insetos Aquáticos por RH**  
 *Distribuição de Insetos Aquaticos em Itapaboana* 
 
-![Insetos](dados/mapas/DISTRIBUIÇÃO INSETOS AQUARICOS ITAPABOANA.png) 
+![Insetos](dados/mapa/DISTRIBUIÇÃO INSETOS AQUARICOS ITAPABOANA.png) 
 
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
