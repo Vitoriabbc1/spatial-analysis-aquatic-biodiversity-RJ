@@ -105,8 +105,7 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
    └── fig8_graficos_regressao_por_RH.png
 📁 tabelas/
    └── tabela_especies_por_RH.png
-📄 README.md
-📄 monografia_vitoria_carvalho_2025.pdf
+
 ```
 
 ---
