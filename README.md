@@ -134,6 +134,9 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 *Distribuição de Insetos Aquáticos em Dois Rios*
 ![Insetos](dados/mapa/doisrios.png) 
 
+*Distribuição de Insetos Aquáticos em Ilha Grande*
+![Insetos](dados/mapa/ilha_grande.png)
+
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
 **Densidade de ocorrências da biodiversidade aquática**  
