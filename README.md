@@ -132,7 +132,7 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 ![Insetos](dados/mapa/itapaboana.png)
 
 *Distribuição de Insetos Aquáticos em Dois Rios*
-[!Insetos](dados/mapa/doisrios.png) 
+![Insetos](dados/mapa/doisrios.png) 
 
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
