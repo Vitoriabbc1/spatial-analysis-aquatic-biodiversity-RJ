@@ -2,7 +2,7 @@
 
 > Monografia de conclusão de curso — Bacharelado em Ciências Biológicas  
 > Universidade do Estado do Rio de Janeiro (UERJ) — 2025  
-> **Nota: 10,0**
+>
 
 ---
 
@@ -122,6 +122,9 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 ---
 
 ## 🗺️ Mapas
+
+**Regiões Hidrograficas do Estado do Rio de Janeiro**
+![RHS](dados/RHS_RJ.png)
 
 **Distribuição de macroinvertebrados aquáticos por RH**  
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
