@@ -140,6 +140,9 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 *Distribuição de Insetos Aquáticos em Guandu* 
 ![Insetos](dados/mapa/guandu.png) 
 
+*Distribuição de Insetos Aquáticos em Piabanha* 
+![Insetos](dados/mapa/piabanha.png)
+
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
 **Densidade de ocorrências da biodiversidade aquática**  
