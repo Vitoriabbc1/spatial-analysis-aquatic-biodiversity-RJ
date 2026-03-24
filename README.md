@@ -10,11 +10,11 @@
 
 Este trabalho investiga a relação espacial entre a **biodiversidade aquática** e a **qualidade hídrica** no Estado do Rio de Janeiro, integrando dados georreferenciados de ocorrência de espécies com o Índice de Qualidade da Água (IQA) dos principais mananciais fluminenses.
 
-A hipótese central é que áreas de maior riqueza de espécies aquáticas coincidem com condições favoráveis de qualidade da água — e que essa relação, quando mapeada, pode orientar estratégias de conservação e segurança hídrica no estado.
+A hipótese central é que áreas de maior riqueza de espécies aquáticas coincidem com condições favoráveis de qualidade da água e que essa relação, quando mapeada, pode orientar estratégias de conservação e segurança hídrica no estado.
 
 ---
 
-## 🎯 Objetivos
+## :round_pushpin: Objetivos
 
 - Mapear a distribuição espacial da biodiversidade aquática fluminense (macroinvertebrados e peixes)
 - Produzir mapas temáticos e analíticos das ocorrências por Região Hidrográfica (RH)
