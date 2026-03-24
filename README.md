@@ -6,7 +6,7 @@
 
 ---
 
-## 📌 Sobre o Projeto
+## :mortar_board: Sobre o Projeto
 
 Este trabalho investiga a relação espacial entre a **biodiversidade aquática** e a **qualidade hídrica** no Estado do Rio de Janeiro, integrando dados georreferenciados de ocorrência de espécies com o Índice de Qualidade da Água (IQA) dos principais mananciais fluminenses.
 
