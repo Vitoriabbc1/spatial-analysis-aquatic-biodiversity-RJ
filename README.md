@@ -1,3 +1,5 @@
+![capa](dados/capa.png)
+
 # 💧 Integrando Biodiversidade Aquática e Segurança Hídrica no Estado do Rio de Janeiro
 
 > Monografia de conclusão de curso — Bacharelado em Ciências Biológicas  
