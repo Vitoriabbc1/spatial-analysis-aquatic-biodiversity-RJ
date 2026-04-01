@@ -148,6 +148,12 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 *Distribuição de Insetos Aquáticos em Macaé*
 ![Insetos](dados/mapa/macae.png) 
 
+*Distribuição de Insetos Aquáticos em Baia de Guanabara*
+![Insetos](dados/mapa/baia.png)
+
+*Distribuição de Insetos Aquáticos em Lagos de São João* 
+![Insetos](dados/mapa/lagos.png) 
+
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
 **Densidade de ocorrências da biodiversidade aquática**  
@@ -158,6 +164,7 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 
 **Gráficos de regressão linear por Região Hidrográfica**  
 ![Regressão por RH](mapas/fig8_graficos_regressao_por_RH.png)
+
 
 ---
 
