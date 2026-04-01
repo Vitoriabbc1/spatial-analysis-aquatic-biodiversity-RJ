@@ -145,6 +145,9 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 *Distribuição de Insetos Aquáticos em Médio Paraiba do Sul*
 ![Insetos](dados/mapa/medioparaiba.png) 
 
+*Distribuição de Insetos Aquáticos em Macaé*
+![Insetos](dados/mapa/macae.png) 
+
 ![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
 
 **Densidade de ocorrências da biodiversidade aquática**  
