@@ -1,7 +1,6 @@
 ![capa](dados/capa.png)
 
-> Monografia de conclusão de curso — Bacharelado em Ciências Biológicas  
-> Universidade do Estado do Rio de Janeiro (UERJ) — 2025  
+> 
 >
 
 ---
