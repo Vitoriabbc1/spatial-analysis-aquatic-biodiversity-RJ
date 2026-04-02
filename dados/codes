@@ -1,1 +1,156 @@
 
+import pandas as pd
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import FancyArrowPatch
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+import numpy as np
+from scipy.ndimage import gaussian_filter
+import geobr
+import shapely.vectorized # Importação alternativa mais compatível
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 1. DADOS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Simulando ou carregando o df (certifique-se que o arquivo existe)
+df = pd.read_csv('bio.csv')
+df = df.dropna(subset=['lat_', 'lon_'])
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 2. GEOMETRIA → UTM metros
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+rj_geo  = geobr.read_state(code_state="RJ", year=2020).to_crs(epsg=4326)
+rj_utm  = rj_geo.to_crs(epsg=31983)
+rj_poly = rj_utm.union_all()
+
+pts = gpd.GeoDataFrame(
+    df, geometry=gpd.points_from_xy(df['lon_'], df['lat_']), crs=4326
+).to_crs(epsg=31983)
+
+x_pts = pts.geometry.x.values
+y_pts = pts.geometry.y.values
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 3. RASTER DE ALTA RESOLUÇÃO
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+bounds   = rj_utm.total_bounds
+pad      = 15_000
+GRID_RES = 1200   
+
+xi = np.linspace(bounds[0]-pad, bounds[2]+pad, GRID_RES+1)
+yi = np.linspace(bounds[1]-pad, bounds[3]+pad, GRID_RES+1)
+cell_m = (xi[-1]-xi[0]) / GRID_RES 
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 4. KERNEL DENSITY
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RADIUS_M = 12_000   
+
+hist, _, _ = np.histogram2d(x_pts, y_pts, bins=[xi, yi])
+hist = hist.T   
+
+sigma_px = RADIUS_M / cell_m
+zz = gaussian_filter(hist.astype(float), sigma=sigma_px)
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 5. MÁSCARA (CORRIGIDO PARA SER COMPATÍVEL)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+xc = xi[:-1] + cell_m/2
+yc = yi[:-1] + cell_m/2
+xx, yy = np.meshgrid(xc, yc)
+
+# Usando shapely.vectorized.contains que funciona em versões antigas e novas
+inside = shapely.vectorized.contains(rj_poly, xx, yy)
+
+zz_inside = zz.copy()
+zz_inside[~inside] = np.nan
+
+THRESHOLD_PCT = 0.04
+vmax  = np.nanpercentile(zz_inside, 99.5)
+cutoff = vmax * THRESHOLD_PCT
+zz_m  = np.where(inside & (zz > cutoff), zz, np.nan)
+zz_m  = np.ma.masked_invalid(zz_m)
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 6. COLORMAP
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+cmap = LinearSegmentedColormap.from_list('qgis_kde', [
+    '#FFFFE0', '#FFD700', '#FF8C00', '#CC2200', '#660000',
+], N=512)
+cmap.set_bad(color='white', alpha=0) 
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 7. FIGURA
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+fig, ax = plt.subplots(figsize=(16, 10), facecolor='white')
+ax.set_facecolor('white')
+ax.set_aspect('equal')
+
+rj_utm.plot(ax=ax, color='#f5f2eb', edgecolor='none', zorder=1)
+
+img = ax.pcolormesh(
+    xx, yy, zz_m,
+    cmap=cmap,
+    vmin=cutoff, vmax=vmax,
+    shading='gouraud',
+    zorder=2,
+    rasterized=True,
+)
+
+rj_utm.boundary.plot(ax=ax, color='#111111', linewidth=1.3, zorder=4)
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 8. SETA DO NORTE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+axN = inset_axes(ax, width='4%', height='10%',
+                 loc='upper right', borderpad=1.5)
+axN.set_xlim(0, 1)
+axN.set_ylim(0, 1)
+axN.axis('off')
+
+axN.add_patch(plt.Polygon([[0.5,0.95],[0.28,0.38],[0.5,0.52]], closed=True, facecolor='black'))
+axN.add_patch(plt.Polygon([[0.5,0.95],[0.72,0.38],[0.5,0.52]], closed=True, facecolor='white', edgecolor='black'))
+axN.text(0.5, 0.18, 'N', ha='center', va='center', fontsize=11, fontweight='bold')
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 9. BARRA DE ESCALA
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+sb_x = bounds[0] + (bounds[2]-bounds[0]) * 0.22
+sb_y = bounds[1] + (bounds[3]-bounds[1]) * 0.045
+seg, h = 50_000, 5_000
+
+for i, c in enumerate(['black','white','black']):
+    ax.add_patch(mpatches.Rectangle((sb_x + i*seg, sb_y), seg, h, facecolor=c, edgecolor='black', zorder=5))
+
+for label, off in [('0',0), ('50',seg), ('100 km', 2*seg)]:
+    ax.text(sb_x+off, sb_y+h+3_500, label, ha='center', va='bottom', fontsize=8, zorder=6)
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 10. COLORBAR
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+divider = make_axes_locatable(ax)
+cax = divider.append_axes('right', size='2.5%', pad=0.12)
+cbar = plt.colorbar(img, cax=cax)
+cbar.set_label('Densidade de ocorrências', fontsize=10, labelpad=10)
+cbar.set_ticks([cutoff, vmax*0.5, vmax])
+cbar.set_ticklabels(['Baixa', 'Média', 'Alta'])
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 11. TÍTULO E FINALIZAÇÃO
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ax.set_title('Densidade dos Pontos de Ocorrência da Fauna Aquática\nno Estado do Rio de Janeiro', 
+             fontsize=20, fontweight='bold', pad=20)
+
+fig.text(0.13, 0.012, 'Projeção: SIRGAS 2000 / UTM Fuso 23S  |  Fonte: Vitoria Carvalho', 
+         fontsize=7.5, color='#666', fontstyle='italic')
+
+ax.set_xlim(bounds[0]-pad, bounds[2]+pad)
+ax.set_ylim(bounds[1]-pad, bounds[3]+pad)
+ax.axis('off')
+
+plt.tight_layout(rect=[0, 0.03, 1, 1])
+plt.savefig('heatmap_fauna_rj_final.png', dpi=220, bbox_inches='tight')
+plt.show()
