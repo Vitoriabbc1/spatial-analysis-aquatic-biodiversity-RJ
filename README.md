@@ -155,7 +155,7 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 ![Insetos](dados/mapa/lagos.png) 
 
 **Densidade de ocorrências da biodiversidade aquática**  
-![Densidade](heatmap_fauna_rj.png)
+![Densidade](dados/mapa/heatmap_fauna_rj.png)
 
 **Integração entre IQA (Krigagem) e Biodiversidade Aquática**  
 ![Krigagem IQA](mapas/fig7_krigagem_iqa_biodiversidade.png)
