@@ -154,10 +154,8 @@ Para investigar a relação entre biodiversidade aquática e qualidade hídrica,
 *Distribuição de Insetos Aquáticos em Lagos de São João* 
 ![Insetos](dados/mapa/lagos.png) 
 
-![Macroinvertebrados](mapas/fig2_macroinvertebrados_RH.jpg)
-
 **Densidade de ocorrências da biodiversidade aquática**  
-![Densidade](mapas/fig4_densidade_biodiversidade.jpg)
+![Densidade](heatmap_fauna_rj.png)
 
 **Integração entre IQA (Krigagem) e Biodiversidade Aquática**  
 ![Krigagem IQA](mapas/fig7_krigagem_iqa_biodiversidade.png)
